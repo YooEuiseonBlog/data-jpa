@@ -35,6 +35,9 @@ class MemberRepositoryTest {
     @PersistenceContext
     EntityManager em;
 
+    @Autowired
+    MemberQueryRepository memberQueryRepository;
+
     @Test
     public void testMember() {
         System.out.println("memberRepository = " + memberRepository.getClass());
@@ -215,8 +218,8 @@ class MemberRepositoryTest {
         memberRepository.save(new Member("member3", 10));
         memberRepository.save(new Member("member4", 10));
         memberRepository.save(new Member("member5", 10));
-        
-        
+
+
         int age = 10;
         PageRequest pageRequest = PageRequest.of(0, 3, Sort.Direction.DESC, "username"); // page index = 0부터 시작
 
@@ -361,6 +364,11 @@ class MemberRepositoryTest {
 
         //when
         List<Member> result = memberRepository.findLockByUsername("member1");
+    }
+
+    @Test
+    public void callCustom() {
+        List<Member> result = memberRepository.findMebmerCustom();
     }
 
 }
